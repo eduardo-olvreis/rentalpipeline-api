@@ -1,17 +1,36 @@
-version: '3.8'
-
 services:
-  postgres:
+  database:
     image: postgres:16-alpine
-    container_name: rental_pipeline_db
+    container_name: rentalpipeline-db
+    restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: rootpassword
-      POSTGRES_DB: rental_pipeline_db
+      POSTGRES_DB: rentaldb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rentaldb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rentalpipeline-api
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=database;Database=rentaldb;Username=postgres;Password=postgrespassword
+    depends_on:
+      database:
+        condition: service_healthy
 
 volumes:
-  pgdata:
+  postgres_data:
