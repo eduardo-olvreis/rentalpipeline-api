@@ -16,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IImovelService, ImovelService>();
 builder.Services.AddScoped<IPropostaService, PropostaService>();
+builder.Services.AddScoped<INotificadorCondominioService, NotificadorCondominioService>();
 
 var app = builder.Build();
 app.UseMiddleware<GlobalExceptionMiddleware>();

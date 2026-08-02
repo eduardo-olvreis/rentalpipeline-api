@@ -11,11 +11,13 @@ namespace RentalPipeline.Services
     {
         private readonly AppDbContext _context;
         private readonly ILogger<PropostaService> _logger;
+        private readonly INotificadorCondominioService _notificadorCondominio;
 
-        public PropostaService(AppDbContext context, ILogger<PropostaService> logger)
+        public PropostaService(AppDbContext context, ILogger<PropostaService> logger, INotificadorCondominioService notificadorCondominio)
         {
             _context = context;
             _logger = logger;
+            _notificadorCondominio = notificadorCondominio;
         }
 
         public async Task<PropostaResponseDto> CriarPropostaAsync(PropostaCreateDto dto)
@@ -91,7 +93,7 @@ namespace RentalPipeline.Services
             if (dto.NovoStatus == StatusProposta.Ativo)
             {
                 proposta.Imovel.Status = StatusImovel.Alugado;
-                _logger.LogInformation("Proposta {PropostaId} ativada com sucesso. Notificando sistema financeiro do condomínio.", proposta.Id);
+                await _notificadorCondominio.NotificarAtivacaoContratoAsync(proposta.Id, proposta.ImovelId);
             }
             else if (dto.NovoStatus is StatusProposta.Reprovada or StatusProposta.Cancelada)
             {
