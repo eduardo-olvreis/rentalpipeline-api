@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RentalPipeline.Data;
+using RentalPipeline.Services;
 using Scalar.AspNetCore;
 using System.Text.Json.Serialization;
 
@@ -11,6 +12,9 @@ builder.Services.AddControllers().AddJsonOptions(options => {
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IImovelService, ImovelService>();
+builder.Services.AddScoped<IPropostaService, PropostaService>();
 
 var app = builder.Build();
 
