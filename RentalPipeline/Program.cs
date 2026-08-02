@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RentalPipeline.Data;
+using RentalPipeline.Middlewares;
 using RentalPipeline.Services;
 using Scalar.AspNetCore;
 using System.Text.Json.Serialization;
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IImovelService, ImovelService>();
 builder.Services.AddScoped<IPropostaService, PropostaService>();
 
 var app = builder.Build();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
