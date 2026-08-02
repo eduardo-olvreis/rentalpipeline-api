@@ -5,7 +5,7 @@ using RentalPipeline.Services;
 namespace RentalPipeline.Controllers
 {
     [ApiController]
-    [Route("apo/[controller]")]
+    [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;
