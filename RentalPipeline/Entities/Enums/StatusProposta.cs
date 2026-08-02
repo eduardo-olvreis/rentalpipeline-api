@@ -8,6 +8,6 @@
         Assinado = 4,
         Ativo = 5,
         Reprovada = 6,
-        Cnacelada = 7
+        Cancelada = 7
     }
 }
