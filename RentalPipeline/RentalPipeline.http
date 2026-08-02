@@ -1,0 +1,6 @@
+@RentalPipeline_HostAddress = http://localhost:5071
+
+GET {{RentalPipeline_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
