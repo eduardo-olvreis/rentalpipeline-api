@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Itens de Solução/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="RentalPipeline.Tests/RentalPipeline.Tests.csproj" />
   <Project Path="RentalPipeline/RentalPipeline.csproj" />
 </Solution>
