@@ -21,7 +21,7 @@ namespace RentalPipeline.Controllers
             return Ok(imoveis);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ImovelResponseDto>> ObterPorId(Guid id)
         {
             var imovel = await _imovelService.ObterPorIdAsync(id);

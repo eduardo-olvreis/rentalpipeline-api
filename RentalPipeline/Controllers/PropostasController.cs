@@ -21,14 +21,14 @@ namespace RentalPipeline.Controllers
             return CreatedAtAction(nameof(ObterHistorico), new { id = proposta.Id }, proposta);
         }
 
-        [HttpPatch("{id:guid}/status")]
+        [HttpPatch("{id}/status")]
         public async Task<ActionResult<PropostaResponseDto>> AtualizarStatus(Guid id, [FromBody] PropostaUpdateStatusDto dto)
         {
             var proposta = await _propostaService.AtualizarStatusAsync(id, dto);
             return Ok(proposta);
         }
 
-        [HttpGet("{id:guid}/historico")]
+        [HttpGet("{id}/historico")]
         public async Task<ActionResult<IEnumerable<HistoricoPropostaResponseDto>>> ObterHistorico(Guid id)
         {
             var historico = await _propostaService.ObterHistoricoAsync(id);

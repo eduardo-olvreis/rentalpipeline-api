@@ -21,7 +21,7 @@ namespace RentalPipeline.Controllers
             return Ok(clientes);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ClienteResponseDto>> ObterPorId(Guid id)
         {
             var cliente = await _clienteService.ObterPorIdAsync(id);
